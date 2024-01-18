@@ -1,9 +1,6 @@
 .venv/
-
 __pycache__/
-
 dist/
-
-file1.json
-
-file2.json
+.idea/
+coverage/
+.coverage
