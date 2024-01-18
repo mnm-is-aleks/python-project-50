@@ -4,11 +4,15 @@ import json
 from gendiff.diff_generator import generate_diff
 
 
-@pytest.fixture
-def get_path():
+@pytest.fixture(params=[('file1.json', 'file2.json'), ('file1.yaml', 'file2.yaml'),
+                        ('file1.yml', 'file2.yml'), ('file1.json', 'file2.yaml'),
+                        ('file1.json', 'file2.yml'), ('file1.yaml', 'file2.yml')])
+
+
+def get_path(request):
     current_dir = os.path.dirname(os.path.realpath(__file__))
-    file_1 = os.path.join(current_dir, 'fixtures', 'file1.json')
-    file_2 = os.path.join(current_dir, 'fixtures', 'file2.json')
+    file_1 = os.path.join(current_dir, 'fixtures', request.param[0])
+    file_2 = os.path.join(current_dir, 'fixtures', request.param[1])
     expected_output = os.path.join(current_dir, 'fixtures', 'expected_output.txt')
     return file_1, file_2, expected_output
 
